@@ -1,0 +1,13 @@
+# 빌드 산출물
+bin/
+obj/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+
+# DLL (빌드 결과물 / 게임 원본 DLL은 개발사 저작물이므로 저장소에 넣지 않음)
+*.dll
+*.pdb
