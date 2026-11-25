@@ -6,6 +6,8 @@ BepInEx 5 + HarmonyX로 게임 파일을 바꾸지 않고 실행 중에 기능�
 > Unofficial quality-of-life mods for *Pocket Legend* (Steam), built with BepInEx 5 and HarmonyX.
 > Korean / English UI, toggled in-game from the title screen.
 
+**사용자** [모드 목록](#모드-목록) · [설치](#설치) · [알림과 문의](#알림과-문의) &nbsp;|&nbsp; **개발자** [어떻게 만들었나](#어떻게-만들었나) · [빌드](#빌드) · [개발 방식](#개발-방식)
+
 <img src="docs/images/mod_manager.jpg" width="560" alt="타이틀 화면의 모드 관리 메뉴">
 
 ## 모드 목록
@@ -30,7 +32,7 @@ BepInEx 5 + HarmonyX로 게임 파일을 바꾸지 않고 실행 중에 기능�
 <img src="docs/images/hand_shortcut.jpg" width="560" alt="손패 위 숫자 단축키 표시"><br>
 <img src="docs/images/item_sort.jpg" width="560" alt="아이템 정렬 버튼">
 
-## 설치 (사용자)
+## 설치
 
 **[최신 버전 받기 (Releases)](https://github.com/Cl4nn5/Csharp-PocketLegend-Mods/releases/latest)**: 아래 zip 중 하나를 받으세요. 처음이라면 AllInOne 하나면 됩니다. 스팀 커뮤니티 가이드에도 같은 내용이 있습니다.
 
@@ -41,6 +43,16 @@ BepInEx 5 + HarmonyX로 게임 파일을 바꾸지 않고 실행 중에 기능�
 | `PocketLegend-2-UX` / `UI` / `Balance` | 분류별 모드 묶음 (Base 필요) |
 
 게임 폴더(`PocketLegend.exe`가 있는 곳)에 압축을 풀면 됩니다. 설치 전에는 세이브 폴더 `%USERPROFILE%\AppData\LocalLow\ShadingBox\PocketLegend\Save` 를 백업해 두세요.
+
+## 알림과 문의
+
+- 개발사와 무관한 **비공식 팬 모드**입니다. 모드 관련 문의는 개발사가 아닌 제작자에게 해 주세요.
+- 게임 파일과 디컴파일한 게임 코드는 포함되어 있지 않습니다.
+- 버그 제보 / 피드백: 스팀 커뮤니티 가이드 댓글 또는 디스코드 `_clann`
+
+---
+
+> 여기부터는 **개발자용**입니다. 모드를 쓰기만 하신다면 위까지만 읽으시면 됩니다.
 
 ## 어떻게 만들었나
 
@@ -80,7 +92,7 @@ BepInEx 5 + HarmonyX로 게임 파일을 바꾸지 않고 실행 중에 기능�
 - 개발용 빌드(`-p:ModDev=true`)에는 타이틀 화면을 자동으로 조작하며 게임 내부에서 스크린샷을 남기는 자체 테스트가 들어갑니다. 다른 창에 가려져도 결과가 남습니다.
 - `tools/Package.ps1`은 전체를 새로 빌드하고, 공식 BepInEx를 내려받아 캐시하고, 분류별 zip과 README를 만듭니다. 분류와 이름은 각 모드 코드에서 읽어 옵니다.
 
-## 빌드 (개발자)
+## 빌드
 
 요구 사항: .NET SDK, Steam판 Pocket Legend, 게임 폴더에 설치된 BepInEx 5.4.23.6 (x64)
 
@@ -105,12 +117,6 @@ ModSource/
 ## 개발 방식
 
 기능 기획, 게임 안 테스트, 배포 결정은 직접 했고, 코드 작성은 [Claude Code](https://claude.com/claude-code)(AI)와 페어 프로그래밍으로 진행했습니다.
-
-## 알림
-
-- 개발사와 무관한 **비공식 팬 모드**입니다. 모드 관련 문의는 개발사가 아닌 제작자에게 해 주세요.
-- 게임 파일과 디컴파일한 게임 코드는 포함되어 있지 않습니다.
-- 버그 제보 / 피드백: 스팀 커뮤니티 가이드 댓글 또는 디스코드 `_clann`
 
 ## 라이선스
 
