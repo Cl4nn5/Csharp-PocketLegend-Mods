@@ -15,3 +15,4 @@ obj/
 # 배포 결과물 / 다운로드 캐시 (tools/Package.ps1)
 dist/
 .cache/
+docs/*_preview.html
