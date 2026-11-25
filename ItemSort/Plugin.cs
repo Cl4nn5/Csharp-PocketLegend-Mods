@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,6 +28,10 @@ namespace PocketLegend.ItemSort
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "pocketlegend.itemsort";
+        // 모드 관리(Mod Switch)가 리플렉션으로 읽는 표시 정보: 분류(UX=조작 편의, UI=정보 표시, BAL=밸런스 변경) / 한국어 이름 / 협동 플레이 미적용
+        public const string ModCategory = "UX";
+        public const string NameKo = "아이템 정렬";
+        public const bool SingleOnly = false;
 
         internal static ManualLogSource Log;
         internal static ConfigEntry<bool> Enabled;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
@@ -14,10 +14,14 @@ namespace PocketLegend.ShowCardShortcut
     ///  1) 손패 아이템 위에 숫자 단축키(1~9, 0)를 표시한다. (게임에 이미 있는 단축키: BattleUI.UpdateHandKeys)
     ///  2) 턴 종료 버튼 아래에 "손패 수 / 최대(PartyData.handMaxCount = 10)"를 표시한다.
     /// </summary>
-    [BepInPlugin(Guid, "Show Card Shortcut", "0.2.0")]
+    [BepInPlugin(Guid, "Show Card Shortcut", "0.2.1")]
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "pocketlegend.showcardshortcut";
+        // 모드 관리(Mod Switch)가 리플렉션으로 읽는 표시 정보: 분류(UX=조작 편의, UI=정보 표시, BAL=밸런스 변경) / 한국어 이름 / 협동 플레이 미적용
+        public const string ModCategory = "UI";
+        public const string NameKo = "단축키 표시";
+        public const bool SingleOnly = false;
         internal static ManualLogSource Log;
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<bool> ShowHandCount;

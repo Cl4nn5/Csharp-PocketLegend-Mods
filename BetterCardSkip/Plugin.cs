@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using BepInEx;
 using BepInEx.Configuration;
@@ -11,7 +11,7 @@ using UnityEngine.UI;
 namespace PocketLegend.BetterCardSkip
 {
     /// <summary>
-    /// [시험 버전] 전투 승리 보상 화면에서 "카드 획득", "인벤토리 조각" 보상 줄마다
+    /// 전투 승리 보상 화면에서 "카드 획득", "인벤토리 조각" 보상 줄마다
     /// "보상 넘기기 (+2)" 버튼을 붙인다. 누르면 그 보상을 포기하고 골드를 받는다.
     ///
     /// 게임 흐름:
@@ -20,10 +20,14 @@ namespace PocketLegend.BetterCardSkip
     ///  - 받음 처리: reward.Get(ui) → 줄 숨김 + IsGet = true, 전부 받으면 보상 화면이 닫힘
     ///  - 카드 선택 창의 "취소"는 보상 목록으로 돌아가기일 뿐이라 골드 지급 대상이 아님
     /// </summary>
-    [BepInPlugin(Guid, "Better Card Skip (Test)", "0.2.0")]
+    [BepInPlugin(Guid, "Better Card Skip", "0.3.1")]
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "pocketlegend.bettercardskip";
+        // 모드 관리(Mod Switch)가 리플렉션으로 읽는 표시 정보: 분류(UX=조작 편의, UI=정보 표시, BAL=밸런스 변경) / 한국어 이름 / 협동 플레이 미적용
+        public const string ModCategory = "BAL";
+        public const string NameKo = "보상 넘기기";
+        public const bool SingleOnly = true;
         internal static ManualLogSource Log;
         internal static ConfigEntry<bool> Enabled;
         internal static ConfigEntry<int> Gold;
@@ -70,11 +74,43 @@ namespace PocketLegend.BetterCardSkip
         {
             try
             {
+                // 협동 플레이 중에는 골드가 상대와 공유되므로 버튼을 만들지 않음 (상대의 게임 밸런스에 영향 주지 않기)
                 bool show = Plugin.Enabled.Value && Plugin.Gold.Value > 0 && reward != null
-                            && !reward.IsConnect && Skippable.TryGetValue(reward, out _);
+                            && !reward.IsConnect && Skippable.TryGetValue(reward, out _) && !Coop.IsRun;
+                if (Coop.IsRun && Plugin.Enabled.Value) Coop.LogOnce(Plugin.Log, "협동 플레이 중이라 '보상 넘기기' 버튼을 표시하지 않습니다.");
                 SkipButton.Bind(__instance, show ? reward : null);
             }
             catch (Exception e) { Plugin.Log.LogError(e); }
+        }
+    }
+
+    /// <summary>
+    /// 협동 플레이 판 진행 여부 (CoopSession.IsRun).
+    /// 게임 빌드 26896844 에서 추가된 클래스라, 구버전에서도 죽지 않도록 리플렉션으로 찾고 없으면 false.
+    /// </summary>
+    internal static class Coop
+    {
+        private static readonly Func<bool> getter = Create();
+        private static bool logged;
+
+        private static Func<bool> Create()
+        {
+            var type = AccessTools.TypeByName("CoopSession");
+            var method = type != null ? AccessTools.PropertyGetter(type, "IsRun") : null;
+            if (method == null) return () => false;
+            return (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), method);
+        }
+
+        public static bool IsRun
+        {
+            get { try { return getter(); } catch { return false; } }
+        }
+
+        public static void LogOnce(ManualLogSource log, string message)
+        {
+            if (logged) return;
+            logged = true;
+            log.LogInfo(message);
         }
     }
 
@@ -105,6 +141,7 @@ namespace PocketLegend.BetterCardSkip
         private static void Skip(RewardElementUI element, Reward reward, Vector3 from, int gold)
         {
             if (reward.IsGet) return; // 중복 클릭 방지
+            if (Coop.IsRun) return;    // 버튼이 떠 있는 사이 협동 상태가 된 경우까지 차단
             try
             {
                 // 카드 보상은 "넘긴 카드" 기록을 남기도록 원래 Pass 처리 실행 (IsGet 이 false 일 때만 기록됨)
