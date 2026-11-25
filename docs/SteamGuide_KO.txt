@@ -4,7 +4,7 @@
    "##### 번호 이름 #####" 줄은 표시일 뿐이고, 두 ##### 줄 사이의 내용만 해당 칸에 붙여 넣습니다.
 ※ 가장 편한 방법: tools\Preview-SteamGuide.ps1 -Open 으로 미리보기를 열고, 칸마다 있는 [복사] 버튼을 누른 뒤 스팀 칸에 붙여 넣기
 ※ 섹션 내용의 [b], [list], [table] 같은 표시는 스팀 서식(BBCode)입니다. 그대로 붙여 넣으면 굵은 글씨/목록/표로 바뀝니다.
-※ 올리기 전에 2-2 섹션의 "여기에_다운로드_링크"를 실제 다운로드 주소로 바꾸세요.
+※ 2-2 섹션의 다운로드 링크는 GitHub 릴리스의 "최신 버전" 주소(releases/latest)라서 새 버전을 올려도 바꿀 필요가 없습니다.
 
 ##### 1-1 가이드 제목 #####
 [비공식 모드] UX · UI · Balance 편의 개선 모음 (압축만 풀면 설치)
@@ -43,7 +43,8 @@ Pocket Legend 비공식 편의 모드 모음입니다. BepInEx 포함이라 압�
 다운로드
 
 ##### 2-2 섹션 내용 #####
-[url=여기에_다운로드_링크]▶ 다운로드 페이지[/url]
+[url=https://github.com/Cl4nn5/Csharp-PocketLegend-Mods/releases/latest]▶ 다운로드 페이지 (GitHub, 최신 버전)[/url]
+페이지 아래 Assets 목록에서 zip 파일을 받으세요. 맨 아래 "Source code" 는 개발용 소스라 설치에는 필요 없습니다.
 
 [table]
 [tr][th]파일[/th][th]내용[/th][/tr]

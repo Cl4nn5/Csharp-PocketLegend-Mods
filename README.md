@@ -32,7 +32,7 @@ BepInEx 5 + HarmonyX로 게임 파일을 바꾸지 않고 실행 중에 기능�
 
 ## 설치 (사용자)
 
-배포 파일과 설치 방법은 스팀 커뮤니티 가이드에 정리되어 있습니다. *(링크 추가 예정)*
+**[최신 버전 받기 (Releases)](https://github.com/Cl4nn5/Csharp-PocketLegend-Mods/releases/latest)**: 아래 zip 중 하나를 받으세요. 처음이라면 AllInOne 하나면 됩니다. 스팀 커뮤니티 가이드에도 같은 내용이 있습니다.
 
 | 파일 | 내용 |
 |---|---|
